@@ -1,0 +1,15 @@
+{% extends 'trade_market/base.html' %}
+{% block title %} 
+    Register
+{% endblock title %}
+
+{% block content %} 
+    <br><br>
+    <form method="POST">
+        {% csrf_token %} 
+        {{form.as_p}}
+        <button type="submit">Sign Up</button>
+    </form>
+    
+{% endblock content %}
+

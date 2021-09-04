@@ -1,0 +1,14 @@
+{% extends 'trade_market/base.html' %}
+
+{% block title %} 
+    edit post
+{% endblock title %}
+
+{% block content_left %} 
+    <form method = "POST">
+        {% csrf_token %} 
+        {{form.as_p}}
+        <button type="submit">Submit</button>
+        <a href="{% url 'post_deleted' id %}">პოსტის წაშლა</a>
+    </form>
+{% endblock content_left %}

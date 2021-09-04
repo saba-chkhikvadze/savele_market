@@ -1,0 +1,31 @@
+{% extends 'trade_market/base.html' %}
+
+{% block content_left %}
+<br><br>
+<table class="table table-sm table-red">
+    <thead>
+        <tr>
+            <th scope="col">მაქვს</th>
+            <th scope="col">ნაკადი</th>
+            <th scope="col">მსურს</th>
+            <th scope="col">ნაკადი</th>
+            <th scope="col">ფასი</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in posts %}
+        <tr>
+            <td>{{i.have}}</td>
+            <td>{{i.nakad_has}}</td>
+            <td>{{i.wants}}</td>
+            <td>{{i.nakad_wants}}</td>
+            <td>{{i.price}}</td>
+            <td><a href="{% url 'view_offers' i.id %}">დეტალურად</a></td>
+            <td><a href="{% url 'edit_post' i.id %}">რედაქტირება</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content_left %}

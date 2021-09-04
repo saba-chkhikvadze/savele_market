@@ -1,0 +1,20 @@
+{% extends 'trade_market/base.html' %}
+{% block title %} 
+    make offer
+{% endblock title %}
+
+{% block content_left %}  
+<div class="d-flex justify-content-start">
+    <form method="POST">
+        {% csrf_token %} 
+        <h6>ლოკაცია:</h6>
+        {{form.offered_loc}}
+        <br>
+        <h6>ნაკადი:</h6>
+        {{form.offered_nakad}}
+        <br><br>
+        <button type="submit">make offer</button>
+        {{form.errors}}
+    </form>
+</div>
+{% endblock content_left %}
