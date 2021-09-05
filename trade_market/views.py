@@ -3,7 +3,7 @@ from django.db.models.fields.related import ManyToManyField
 from django.shortcuts import render, redirect
 from .models import Offer, Post
 from django.contrib.auth.decorators import login_required
-from .forms import CreatePostForm, MakeOfferForm
+from .forms import CreatePostForm, EditPostForm, MakeOfferForm
 from django.contrib import messages
 from . filters import PostFilter
 
@@ -12,11 +12,11 @@ def home(request):
 
     if request.user.is_authenticated:
         cur_user = request.user
-        posts = Post.objects.all().exclude(author=cur_user)
+        posts = Post.objects.filter(status='აქტიური').exclude(author=cur_user)
         filter = PostFilter(request.GET, queryset=posts)
         posts = filter.qs
     else:
-        posts = Post.objects.all()
+        posts = Post.objects.filter(status='აქტიური')
         filter = PostFilter(request.GET, queryset=posts)
         posts = filter.qs
     context = {'posts': posts, 'filter': filter}
@@ -45,7 +45,7 @@ def create_post(request):
         form = CreatePostForm(request.POST, instance=post)
         if form.is_valid:
             form.save()
-            return redirect('home')
+            return redirect('my_posts')
     else:
         form = CreatePostForm(instance=post)
     context = {'form': form}
@@ -88,9 +88,9 @@ def edit_post(request, pk):
     cur_post = Post.objects.get(id=pk)
     allowed_user = cur_post.author
     if allowed_user == request.user:
-        form = CreatePostForm(instance=cur_post)
+        form = EditPostForm(instance=cur_post)
         if request.method == 'POST':
-            form = CreatePostForm(request.POST, instance=cur_post)
+            form = EditPostForm(request.POST, instance=cur_post)
             if form.is_valid:
                 form.save()
                 return redirect('my_posts')
@@ -100,6 +100,7 @@ def edit_post(request, pk):
         return render(request, 'trade_market/no-access.html')
 
 
+@login_required
 def delete_post(request, pk):
     cur_post = Post.objects.get(id=pk)
     allowed_user = cur_post.author

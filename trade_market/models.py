@@ -8,6 +8,7 @@ from django.db.models.fields.related import OneToOneField
 locations = [('ბეშუმი', 'ბეშუმი'), ('უფლისციხე',
                                     'უფლისციხე'), ('ფარი', 'ფარი'), ('არჩევითი', 'არჩევითი')]
 thread = [('1', '1'), ('2', '2'), ('3', '3')]
+statuses = [('აქტიური', 'აქტიური'), ('დასრულებული', 'დასრულებული')]
 
 
 class Post(models.Model):
@@ -17,9 +18,7 @@ class Post(models.Model):
     wants = CharField(max_length=50, choices=locations, null=True)
     nakad_wants = CharField(max_length=50, choices=thread, null=True)
     price = IntegerField(default=0)
-
-    def __str__(self):
-        return f'{self.id}, {self.author.username}'
+    status = CharField(max_length=50, choices=statuses, default='აქტიური')
 
 
 class Offer(models.Model):

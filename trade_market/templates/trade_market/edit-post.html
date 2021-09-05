@@ -5,10 +5,18 @@
 {% endblock title %}
 
 {% block content_left %} 
-    <form method = "POST">
-        {% csrf_token %} 
-        {{form.as_p}}
-        <button type="submit">Submit</button>
-        <a href="{% url 'post_deleted' id %}">პოსტის წაშლა</a>
-    </form>
+    <div class="d-flex flex-column w-100">
+        <form method = "POST">
+            {% csrf_token %}
+            {% for i in form %} 
+                <div class="p-2">
+                    {{i.label_tag}} {{i}}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-secondary">შენახვა</button>
+            <div class="p-2">
+                <a href="{% url 'post_deleted' id %}">პოსტის წაშლა</a>
+            </div>
+        </form>
+    </div>
 {% endblock content_left %}

@@ -12,6 +12,15 @@ class CreatePostForm(ModelForm):
                   'wants': 'მსურს(ლოკაცია)', 'nakad_wants': 'მსურს(ნაკადი)', 'price': 'ფასი'}
 
 
+class EditPostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ['have', 'nakad_has', 'wants',
+                  'nakad_wants', 'status', 'price']
+        labels = {'have': 'მაქვს (ლოკაცია)', 'nakad_has': 'მაქვს(ნაკადი)',
+                  'wants': 'მსურს(ლოკაცია)', 'nakad_wants': 'მსურს(ნაკადი)', 'status': 'სტატუსი', 'price': 'ფასი'}
+
+
 class MakeOfferForm(ModelForm):
     class Meta:
         model = Offer
