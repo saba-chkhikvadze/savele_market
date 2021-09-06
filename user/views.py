@@ -1,14 +1,18 @@
+from user.forms import UserRegistrationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid:
-            form.save()
-            return redirect('home')
+            new_user = form.save()
+            messages.success(request, 'წარმატებით დარეგისტრირდით')
+            login(request, new_user)
+            return redirect('setup_profile')
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
     context = {'form': form}
     return render(request, 'user/registration.html', context)

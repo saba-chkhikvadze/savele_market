@@ -1,6 +1,7 @@
 from django import forms
 from django.db.models import fields
-from . models import Offer, Post
+from django.db.models.base import Model
+from . models import Offer, Post, Profile
 from django.forms import ModelForm
 
 
@@ -29,3 +30,9 @@ class MakeOfferForm(ModelForm):
 
 nakad_choices = locations = [('ბეშუმი', 'ბეშუმი'), ('უფლისციხე',
                                                     'უფლისციხე'), ('ფარი', 'ფარი'), ('არჩევითი', 'არჩევითი')]
+
+
+class SetupProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name', 'last_name', 'email',  'uni']

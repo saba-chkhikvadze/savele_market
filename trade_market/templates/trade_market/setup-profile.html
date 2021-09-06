@@ -1,0 +1,9 @@
+{% extends 'trade_market/base.html' %}
+
+{% block content_left %} 
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">შენახვა</button>
+    </form>
+{% endblock content_left %}

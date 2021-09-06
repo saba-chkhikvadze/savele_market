@@ -1,9 +1,10 @@
 
+from django.contrib.auth.models import User
 from django.db.models.fields.related import ManyToManyField
 from django.shortcuts import render, redirect
-from .models import Offer, Post
+from .models import Offer, Post, Profile
 from django.contrib.auth.decorators import login_required
-from .forms import CreatePostForm, EditPostForm, MakeOfferForm
+from .forms import CreatePostForm, EditPostForm, MakeOfferForm, SetupProfileForm
 from django.contrib import messages
 from . filters import PostFilter
 
@@ -39,17 +40,21 @@ def my_posts(request):
 @login_required
 def create_post(request):
     cur_user = request.user
-    post = Post()
-    post.author = cur_user
-    if request.method == 'POST':
-        form = CreatePostForm(request.POST, instance=post)
-        if form.is_valid:
-            form.save()
-            return redirect('my_posts')
+    profile = Profile.objects.get(user=cur_user)
+    if profile.profile_setup():
+        post = Post()
+        post.author = cur_user
+        if request.method == 'POST':
+            form = CreatePostForm(request.POST, instance=post)
+            if form.is_valid:
+                form.save()
+                return redirect('my_posts')
+        else:
+            form = CreatePostForm(instance=post)
+        context = {'form': form}
+        return render(request, 'trade_market/create-post.html', context)
     else:
-        form = CreatePostForm(instance=post)
-    context = {'form': form}
-    return render(request, 'trade_market/create-post.html', context)
+        return redirect('setup_profile')
 
 
 @login_required
@@ -57,16 +62,21 @@ def make_offer(request, pk):
     cur_post = Post.objects.get(id=pk)
     author = cur_post.author
     if request.user != author:
-        form = MakeOfferForm()
-        if request.method == 'POST':
-            form = MakeOfferForm(request.POST)
-            if form.is_valid:
-                form.instance.post = cur_post
-                form.instance.author = request.user
-                form.save()
-                return redirect('home')
-        context = {'form': form}
-        return render(request, 'trade_market/make-offer.html', context)
+        profile = Profile.objects.get(user=author)
+        if profile.profile_setup():
+            form = MakeOfferForm()
+            if request.method == 'POST':
+                form = MakeOfferForm(request.POST)
+                if form.is_valid:
+                    form.instance.post = cur_post
+                    form.instance.author = request.user
+                    form.save()
+                    return redirect('home')
+            context = {'form': form}
+            return render(request, 'trade_market/make-offer.html', context)
+        else:
+            message = 'შეავსეთ პროფილის მონაცემები რათა შეძლოთ წვდომა გვერდთან!'
+            return redirect('setup_profile')
     else:
         return render(request, 'trade_market/no-access.html')
 
@@ -109,3 +119,19 @@ def delete_post(request, pk):
         return render(request, 'trade_market/deleted.html')
     else:
         return render(request, 'trade_market/no-access.html')
+
+
+@login_required
+def setup_profile(request):
+    cur_user = request.user
+    profile = Profile.objects.get(user=cur_user)
+    form = SetupProfileForm(instance=profile)
+    print(type(form))
+    form.user = cur_user
+    if request.method == 'POST':
+        form = SetupProfileForm(request.POST, instance=profile)
+        if form.is_valid:
+            prof = form.save()
+            return redirect('home')
+    context = {'form': form}
+    return render(request, 'trade_market/setup-profile.html', context)

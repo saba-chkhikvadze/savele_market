@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit-post/<str:pk>', views.edit_post, name='edit_post'),
     path('post-deleted/<str:pk>', views.delete_post, name='post_deleted'),
     path('about/', views.about, name='about'),
+    path('setup-profile/', views.setup_profile, name='setup_profile')
 ]
