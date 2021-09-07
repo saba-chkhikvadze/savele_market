@@ -135,3 +135,22 @@ def setup_profile(request):
             return redirect('home')
     context = {'form': form}
     return render(request, 'trade_market/setup-profile.html', context)
+
+
+@login_required
+def view_profile(request, pk):
+    user = User.objects.get(id=pk)
+    profile = Profile.objects.get(user=user)
+    is_own = False
+    if request.user == user:
+        is_own = True
+    context = {'profile': profile, 'owner': is_own}
+    return render(request, 'trade_market/user-profile.html', context)
+
+
+@login_required
+def my_profile(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    context = {'profile': profile}
+    return render(request, 'trade_market/my-profile.html', context)

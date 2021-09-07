@@ -1,0 +1,31 @@
+{% extends 'trade_market/base.html' %}
+
+{% block content_left %}
+<div class="d-flex justify-content-start">
+    <div class="p-2">
+        <div class="card">
+            <div class="card-body">
+                <h2>მომხმარებელი: {{profile.name}} {{profile.last_name}}</h2>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h2>{{profile.email}}</h2>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h2>უნივერსიტეტი: {{profile.uni}}</h2>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <a class="email-link" href="{% url 'setup_profile' %}">პროფილის რედაქტირება</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+
+
+{% endblock content_left %}

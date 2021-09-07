@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,28 +8,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        body{
-            background: linear-gradient(to right, rgb(0, 175, 0) , rgb(212, 212, 0));
+        body {
+            background: linear-gradient(to right, rgb(0, 175, 0), rgb(212, 212, 0));
         }
+
         .navbar-custom {
             background-color: rgb(212, 47, 47);
+        }
+
+        .email-link {
+            font-size: 1.5em;
+            color: honeydew;
+            margin: auto;
+            width: 50%;
+        }
+
+        .card-body {
+            color: honeydew;
+            background-color: rgb(46, 168, 46);
         }
     </style>
     <title>{% block title %}{%endblock title %}</title>
 </head>
+
 <body>
     {% include 'trade_market/navbar.html' %}
     <div class="container-fluid">
         <div class="d-flex justify-content-center">
-            {% block top_center %} 
+            {% block top_center %}
             {% endblock %}
         </div>
         <div class="d-flex justify-content-start">
-                {% block content_left %}
-                {% endblock %}
+            {% block content_left %}
+            {% endblock %}
         </div>
         <div class="d-flex justify-content-center">
-            {% block center %} 
+            {% block center %}
             {% endblock %}
         </div>
     </div>
@@ -42,4 +57,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
 </html>

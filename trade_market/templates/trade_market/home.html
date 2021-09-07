@@ -1,66 +1,65 @@
 {% extends 'trade_market/base.html' %}
 
-{% block title %} 
-    home page
+{% block title %}
+home page
 {% endblock title %}
-{% block top_center %} 
-    <div class="d-flex flex-column w-100">
-        <div class = "p-2">
-            <form method="GET">
-                <table>
-                    <tr>
-                        ლოკაცია (ვეძებ):
-                        {{filter.form.have}}
-                        ნაკადი (ვეძებ):
-                        {{filter.form.nakad_has}}
-                        ლოკაცია (მაქვს): 
-                        {{filter.form.wants}}
-                        ნაკადი (მაქვს):
-                        {{filter.for.nakad_wants}}
-                        <button type="submit" class="btn btn-secondary btn-sm">დახარისხება</button>
-                    </tr>
-                    
-                </table>
-                
-            </form>
-        </div>
+{% block top_center %}
+<div class="d-flex flex-column w-100">
+    <div class="p-2">
+        <form method="GET">
+            <table>
+                <tr>
+                    ლოკაცია (ვეძებ):
+                    {{filter.form.have}}
+                    ნაკადი (ვეძებ):
+                    {{filter.form.nakad_has}}
+                    ლოკაცია (მაქვს):
+                    {{filter.form.wants}}
+                    ნაკადი (მაქვს):
+                    {{filter.for.nakad_wants}}
+                    <button type="submit" class="btn btn-secondary btn-sm">დახარისხება</button>
+                </tr>
+
+            </table>
+
+        </form>
     </div>
+</div>
 {% endblock top_center %}
 {% block content_left %}
-    <br><br>
-    <div class="d-flex flex-column w-100">
-        <div class="p-2">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">ავტორი</th>
-                            <th scope="col">მაქვს</th>
-                            <th scope="col">ნაკადი</th>
-                            <th scope="col">მსურს</th>
-                            <th scope="col">ნაკადი</th>
-                            <th scope="col">ფასი</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for i in posts %}
-                        <tr>
-                            <td>{{i.author}}</td>
-                            <td>{{i.have}}</td>
-                            <td>{{i.nakad_has}}</td>
-                            <td>{{i.wants}}</td>
-                            <td>{{i.nakad_wants}}</td>
-                            <td>{{i.price}}</td>
-                            {% if user.is_authenticated %}
-                            <td><a href="{% url 'make_offer' i.id %}" class="link-primary">გააკეთე შეთავაზება</a></td>
-                            {% endif %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+<br><br>
+<div class="d-flex flex-column w-100">
+    <div class="p-2">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ავტორი</th>
+                        <th scope="col">მაქვს</th>
+                        <th scope="col">ნაკადი</th>
+                        <th scope="col">მსურს</th>
+                        <th scope="col">ნაკადი</th>
+                        <th scope="col">ფასი</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in posts %}
+                    <tr>
+                        <td><a href="{% url 'view_profile' i.author.id %}">{{i.author}}</a></td>
+                        <td>{{i.have}}</td>
+                        <td>{{i.nakad_has}}</td>
+                        <td>{{i.wants}}</td>
+                        <td>{{i.nakad_wants}}</td>
+                        <td>{{i.price}}</td>
+                        {% if user.is_authenticated %}
+                        <td><a href="{% url 'make_offer' i.id %}" class="link-primary">გააკეთე შეთავაზება</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 {% endblock content_left %}
-
