@@ -16,8 +16,10 @@ home page
                     ლოკაცია (მაქვს):
                     {{filter.form.wants}}
                     ნაკადი (მაქვს):
-                    {{filter.for.nakad_wants}}
-                    <button type="submit" class="btn btn-secondary btn-sm">დახარისხება</button>
+                    {{filter.form.nakad_wants}}
+                    უნივერსიტეტი:
+                    {{filter.form.uni}}
+                    <button type="submit" id="home-b" class="btn btn-secondary btn-sm">დახარისხება</button>
                 </tr>
 
             </table>
@@ -39,6 +41,7 @@ home page
                         <th scope="col">ნაკადი</th>
                         <th scope="col">მსურს</th>
                         <th scope="col">ნაკადი</th>
+                        <th scope="col">უნივერსიტეტი</th>
                         <th scope="col">ფასი</th>
                         <th scope="col"></th>
                     </tr>
@@ -51,6 +54,7 @@ home page
                         <td>{{i.nakad_has}}</td>
                         <td>{{i.wants}}</td>
                         <td>{{i.nakad_wants}}</td>
+                        <td>{{i.uni}}</td>
                         <td>{{i.price}}</td>
                         {% if user.is_authenticated %}
                         <td><a href="{% url 'make_offer' i.id %}" class="link-primary">გააკეთე შეთავაზება</a></td>

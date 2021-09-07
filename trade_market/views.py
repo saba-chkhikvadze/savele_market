@@ -41,9 +41,11 @@ def my_posts(request):
 def create_post(request):
     cur_user = request.user
     profile = Profile.objects.get(user=cur_user)
+    uni = profile.uni
     if profile.profile_setup():
         post = Post()
         post.author = cur_user
+        post.uni = uni
         if request.method == 'POST':
             form = CreatePostForm(request.POST, instance=post)
             if form.is_valid:
@@ -137,7 +139,6 @@ def setup_profile(request):
     return render(request, 'trade_market/setup-profile.html', context)
 
 
-@login_required
 def view_profile(request, pk):
     user = User.objects.get(id=pk)
     profile = Profile.objects.get(user=user)

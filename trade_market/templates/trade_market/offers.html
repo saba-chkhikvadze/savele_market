@@ -1,27 +1,27 @@
 {% extends 'trade_market/base.html' %}
-{% block title %} 
-    offers
+{% block title %}
+offers
 {% endblock title %}
 
-{% block content_left %} 
-    <table class="table table-sm table-red">
-        <thead>
-            <tr>
-                <th scope="col">ავტორი</th>
-                <th scope="col">ლოკაცია</th>
-                <th scope="col">ნაკადი</th>
-                <th scope="col">ფასი</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in offers %}
-            <tr>
-                <td>{{i.author.username}}</td>
-                <td>{{i.offered_loc}}</td>
-                <td>{{i.offered_nakad}}</td>
-                <td>--</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% block content_left %}
+<table class="table table-sm table-red">
+    <thead>
+        <tr>
+            <th scope="col">ავტორი</th>
+            <th scope="col">ლოკაცია</th>
+            <th scope="col">ნაკადი</th>
+            <th scope="col">ფასი</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in offers %}
+        <tr>
+            <td><a href="{% url 'view_profile' i.author.id %}">{{i.author.username}}</a></td>
+            <td>{{i.offered_loc}}</td>
+            <td>{{i.offered_nakad}}</td>
+            <td>--</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock content_left %}

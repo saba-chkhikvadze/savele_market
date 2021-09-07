@@ -21,6 +21,7 @@ class Post(models.Model):
     nakad_wants = CharField(max_length=50, choices=thread, null=True)
     price = IntegerField(default=0)
     status = CharField(max_length=50, choices=statuses, default='აქტიური')
+    uni = CharField(max_length=50, choices=uni_choices, null=True)
 
 
 class Profile(models.Model):
