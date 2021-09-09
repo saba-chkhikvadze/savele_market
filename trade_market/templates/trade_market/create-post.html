@@ -1,16 +1,13 @@
 {% extends 'trade_market/base.html' %}
-{% block title %} 
-    Create Post 
+{% block title %}
+Create Post
 {% endblock title %}
-{% block content_left %} 
-<div class="d-flex flex-column w-100">
-    <div class="p2"><br></div>
-    <div class="p2">
-        <form method="POST">
-            {% csrf_token %}
-            {{form.as_table}}
-            <button type="submit" class="btn btn-secondary btn-sm">დაამატე პოსტი</button>
-        </form>
-    </div>
+{% block content_left %}
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p }}
+        <button class="btn btn-secondary">პოსტის შექმნა</button>
+    </form>
 </div>
 {% endblock content_left %}

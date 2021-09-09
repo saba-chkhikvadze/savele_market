@@ -1,30 +1,36 @@
 {% extends 'trade_market/base.html' %}
-
+{% load static %}
 {% block title %}
 home page
 {% endblock title %}
 {% block top_center %}
-<div class="d-flex flex-column w-100">
-    <div class="p-2">
-        <form method="GET">
-            <table>
-                <tr>
-                    ლოკაცია (ვეძებ):
-                    {{filter.form.have}}
-                    ნაკადი (ვეძებ):
-                    {{filter.form.nakad_has}}
-                    ლოკაცია (მაქვს):
-                    {{filter.form.wants}}
-                    ნაკადი (მაქვს):
-                    {{filter.form.nakad_wants}}
-                    უნივერსიტეტი:
-                    {{filter.form.uni}}
-                    <button type="submit" id="home-b" class="btn btn-secondary btn-sm">დახარისხება</button>
-                </tr>
 
-            </table>
-
-        </form>
+<div class="container">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm">
+                ლოკაცია (ვეძებ):{{filter.form.have}}
+            </div>
+            <div class="col-sm">
+                ნაკადი (ვეძებ):
+                {{filter.form.nakad_has}}
+            </div>
+            <div class="col-sm">
+                ლოკაცია (მაქვს):
+                {{filter.form.wants}}
+            </div>
+            <div class="col-sm">
+                ნაკადი (მაქვს):
+                {{filter.form.nakad_wants}}
+            </div>
+            <div class="col-sm">
+                უნივერსიტეტი:
+                {{filter.form.uni}}
+            </div>
+            <div class="col-sm">
+                <button type="submit" id="home-b" class="btn btn-secondary">დახარისხება</button>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock top_center %}
@@ -66,4 +72,5 @@ home page
         </div>
     </div>
 </div>
+<p><img src="{% static 'trade_market/github.png' %}" alt=""></p>
 {% endblock content_left %}

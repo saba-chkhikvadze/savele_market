@@ -1,17 +1,17 @@
-{% extends 'trade_market/base.html' %} 
-{% block title %} login {% endblock title %} 
+{% extends 'trade_market/base.html' %}
+{% block title %} login {% endblock title %}
 
-{% block center %} 
-    
-    <form method="POST">
-        {% csrf_token %}
-        <table>
-            <br><br><br><br>
-            
-            {{form.as_table}}
-            
-        </table>
-        <br>
-        <button type="submit" class="btn btn-secondary">Login</button>
-    </form>
+{% block center %}
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        <br><br><br><br>
+
+        {{form.as_table}}
+
+    </table>
+    <br>
+    <button type="submit" class="btn btn-secondary">შესვლა</button>
+</form>
 {% endblock center %}

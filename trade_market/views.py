@@ -134,7 +134,7 @@ def setup_profile(request):
         form = SetupProfileForm(request.POST, instance=profile)
         if form.is_valid:
             prof = form.save()
-            return redirect('home')
+            return redirect('setup_profile')
     context = {'form': form}
     return render(request, 'trade_market/setup-profile.html', context)
 
@@ -155,3 +155,7 @@ def my_profile(request):
     profile = Profile.objects.get(user=user)
     context = {'profile': profile}
     return render(request, 'trade_market/my-profile.html', context)
+
+
+def test(request):
+    return render(request, 'trade_market/tst.html')

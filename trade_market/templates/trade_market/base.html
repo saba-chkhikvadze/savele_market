@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +10,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
-            background: linear-gradient(to right, rgb(0, 175, 0), rgb(212, 212, 0));
+            background: linear-gradient(to right, rgb(1, 124, 1), rgb(212, 212, 0));
         }
 
         .navbar-custom {
@@ -26,6 +27,11 @@
         .card-body {
             color: honeydew;
             background-color: rgb(46, 168, 46);
+        }
+
+        #home-b {
+            margin-top: 1.3em;
+            padding: 0.12em;
         }
     </style>
     <title>{% block title %}{%endblock title %}</title>

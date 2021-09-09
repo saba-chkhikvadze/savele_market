@@ -1,22 +1,15 @@
 {% extends 'trade_market/base.html' %}
 
-{% block title %} 
-    edit post
+{% block title %}
+edit post
 {% endblock title %}
 
-{% block content_left %} 
-    <div class="d-flex flex-column w-100">
-        <form method = "POST">
-            {% csrf_token %}
-            {% for i in form %} 
-                <div class="p-2">
-                    {{i.label_tag}} {{i}}
-                </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-secondary">შენახვა</button>
-            <div class="p-2">
-                <a href="{% url 'post_deleted' id %}">პოსტის წაშლა</a>
-            </div>
-        </form>
-    </div>
+{% block content_left %}
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-secondary">ცვლილებების შენახვა</button>
+    </form>
+</div>
 {% endblock content_left %}

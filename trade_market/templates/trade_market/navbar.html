@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Savele Market</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -7,24 +8,29 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'home' %}">მთავარი <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'my_posts' %}">My Posts</a>
+                <a class="nav-link" href="{% url 'my_posts' %}">ჩემი პოსტები</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'create_post' %}">Create Post</a>
+                <a class="nav-link" href="{% url 'create_post' %}">პოსტის შექმნა</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
+                <a class="nav-link" href="{% url 'about' %}">შესახებ</a>
             </li>
         </ul>
+
         {% if user.is_authenticated %}
         <a href="{% url 'my_profile' %}">{{user.username}}</a>
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        <a class="nav-link" href="{% url 'logout' %}">გასვლა</a>
         {% else %}
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
+
+        <a class="nav-link" href="{% url 'login' %}">შესვლა</a>
+        <a class="nav-link" href="{% url 'register' %}">რეგისტრაცია</a>
         {% endif %}
+        <br><br>
+        <a href="https://github.com/saba-chkhikvadze/savele_market"><img src="{% static '/images/github.png/' %}"
+                width="30" height="30" class="d-inline-block" alt=""></a>
     </div>
 </nav>
